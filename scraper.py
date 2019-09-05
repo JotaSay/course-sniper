@@ -1,8 +1,18 @@
 from flask import Flask, render_template, request
 from flask import json
+from flask.ext.sqlalchemy import SQLAlchemy
+
 app = Flask(__name__)
 
+app.config.from_object(os.environ['APP_SETTINGS'])
+
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+
+
+db = SQLAlchemy(app)
+from models import Result
 import requests
+
 
 @app.route('/')
 def main(): 
